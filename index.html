@@ -3,92 +3,129 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>سافيو ستوديو VO | منصة التعليق الصوتي العربي الاحترافي</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/growthack88/indie-hacker-arabic/main/public/favicon.png" />
+    <title>محمود عمر | استوديو التعليق الصوتي العربي الاحترافي</title>
+    <meta name="description" content="استوديو محمود عمر للتعليق الصوتي — منصة ذكية لإنتاج أصوات عربية احترافية بجودة سينمائية، مدعومة بذكاء Gemini." />
+    <meta name="author" content="Mahmoud Omar" />
+
+    <meta property="og:title" content="محمود عمر | استوديو التعليق الصوتي العربي الاحترافي" />
+    <meta property="og:description" content="منصة ذكية لإنتاج أصوات عربية احترافية بجودة سينمائية، بصنع محمود عمر." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://mahmoudomar.com/og-image.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://mahmoudomar.com/og-image.png" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- mammoth.js for .docx support -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Montserrat:wght@200;400;600;700;800;900&family=Tajawal:wght@200;300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Space+Mono:wght@400;700&family=Cairo:wght@400;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
       :root {
-        --gold-primary: #d4af37;
-        --gold-glow: rgba(212, 175, 55, 0.4);
-        --studio-dark: #050505;
-        --glass-bg: rgba(15, 15, 15, 0.6);
-        --neon-blue: #00f3ff;
-        --neon-green: #00ff9d;
-        --muted-gold: rgba(212, 175, 55, 0.04);
+        /* Mahmoud Omar brand palette */
+        --mo-yellow: #FFCF40;          /* hsl(47 100% 62%) */
+        --mo-yellow-deep: #F5B800;
+        --mo-yellow-light: #FFE99B;
+        --mo-cream: #FAF7F2;
+        --mo-black: #0A0A0A;
+        --mo-gray-dark: #1A1A1A;
+        --mo-gray-mid: #2A2A2A;
+        --mo-glow: rgba(255, 207, 64, 0.45);
+
+        /* Legacy aliases — keep identical class behavior, new hue */
+        --gold-primary: var(--mo-yellow);
+        --gold-glow: var(--mo-glow);
+        --studio-dark: var(--mo-black);
+        --glass-bg: rgba(18, 18, 18, 0.6);
+        --neon-blue: #FFE99B;
+        --neon-green: var(--mo-yellow);
+        --muted-gold: rgba(255, 207, 64, 0.04);
       }
       body {
-        font-family: 'Tajawal', 'Montserrat', sans-serif;
+        font-family: 'Tajawal', 'Cairo', sans-serif;
         background-color: var(--studio-dark);
-        color: #e5e5e5;
+        color: #ededed;
         overflow-x: hidden;
         perspective: 1200px;
       }
       .font-arabic {
-        font-family: 'Tajawal', 'Amiri', serif;
+        font-family: 'Tajawal', 'Cairo', sans-serif;
+      }
+      .font-display {
+        font-family: 'Playfair Display', serif;
+      }
+      .font-mono-mo {
+        font-family: 'Space Mono', monospace;
       }
       /* 3D Glassmorphism */
       .glass-3d {
         background: var(--glass-bg);
         backdrop-filter: blur(25px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 
+        border: 1px solid rgba(255, 207, 64, 0.08);
+        box-shadow:
           0 25px 50px -12px rgba(0, 0, 0, 0.5),
-          inset 0 1px 1px rgba(255, 255, 255, 0.1);
+          inset 0 1px 1px rgba(255, 255, 255, 0.06);
         transform-style: preserve-3d;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
       .glass-3d:hover {
         transform: translateY(-5px) rotateX(2deg);
-        box-shadow: 
+        box-shadow:
           0 35px 60px -15px rgba(0, 0, 0, 0.6),
-          inset 0 1px 1px rgba(255, 255, 255, 0.15);
+          inset 0 1px 1px rgba(255, 207, 64, 0.12);
       }
-      /* Gold Styling */
+      /* Mahmoud Omar Yellow (legacy class names kept) */
       .gold-text {
-        background: linear-gradient(135deg, #f1c40f 0%, #d4af37 50%, #9a7b00 100%);
+        background: linear-gradient(135deg, #FFE99B 0%, #FFCF40 50%, #F5B800 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        filter: drop-shadow(0 0 10px rgba(212,175,55,0.3));
+        filter: drop-shadow(0 0 12px rgba(255, 207, 64, 0.35));
       }
       .gold-bg {
-        background: linear-gradient(135deg, #f1c40f 0%, #d4af37 100%);
-        box-shadow: 0 10px 20px -5px rgba(212, 175, 55, 0.4);
+        background: linear-gradient(135deg, #FFE99B 0%, #FFCF40 100%);
+        box-shadow: 0 10px 20px -5px rgba(255, 207, 64, 0.5);
       }
-      /* Android Tech Style Intro */
+      /* Profile avatar used in the header logo spot */
+      .mo-avatar {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 24px;
+        display: block;
+      }
+      /* Mahmoud Omar Intro Logo */
       .android-tech-logo {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Playfair Display', 'Tajawal', serif;
         font-weight: 900;
         text-transform: uppercase;
-        letter-spacing: 0.3em;
-        background: linear-gradient(180deg, #fff 0%, var(--neon-blue) 40%, var(--neon-green) 100%);
+        letter-spacing: 0.12em;
+        background: linear-gradient(180deg, #fff 0%, #FFE99B 40%, #FFCF40 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.2);
-        filter: drop-shadow(0 0 12px rgba(0, 243, 255, 0.4));
+        -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.18);
+        filter: drop-shadow(0 0 14px rgba(255, 207, 64, 0.55));
         animation: android-pulse 4s ease-in-out infinite;
-        text-shadow: 
-          0 1px 0 #004d52, 
-          0 2px 0 #003a3d, 
-          0 3px 0 #002629, 
+        text-shadow:
+          0 1px 0 #7a5d00,
+          0 2px 0 #5c4600,
+          0 3px 0 #3d2f00,
           0 10px 25px rgba(0,0,0,0.6);
       }
       @keyframes android-pulse {
-        0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(0, 243, 255, 0.5)); }
-        50% { transform: scale(1.04); filter: drop-shadow(0 0 35px rgba(0, 255, 157, 0.7)); }
+        0%, 100% { transform: scale(1); filter: drop-shadow(0 0 18px rgba(255, 207, 64, 0.55)); }
+        50% { transform: scale(1.04); filter: drop-shadow(0 0 38px rgba(255, 207, 64, 0.85)); }
       }
       .android-subtitle {
-        font-family: 'Montserrat', sans-serif;
-        color: var(--neon-green);
+        font-family: 'Space Mono', 'Montserrat', monospace;
+        color: var(--mo-yellow);
         text-transform: uppercase;
         font-weight: 700;
         letter-spacing: 0.9em;
         margin-top: 0.25rem;
-        text-shadow: 0 0 20px rgba(0, 255, 157, 0.6);
-        opacity: 0.9;
+        text-shadow: 0 0 20px rgba(255, 207, 64, 0.55);
+        opacity: 0.95;
       }
       /* Cinematic Intro Specifics */
       .chrome-logo {
@@ -99,18 +136,18 @@
         display: inline-block;
         transform-style: preserve-3d;
         animation: rotateLogo 8s linear infinite;
-        text-shadow: 
-          0 1px 0 #ccc, 
-          0 2px 0 #c9c9c9, 
-          0 3px 0 #bbb, 
-          0 4px 0 #b9b9b9, 
-          0 5px 0 #aaa, 
-          0 6px 1px rgba(0,0,0,.1), 
-          0 0 5px rgba(0,0,0,.1), 
-          0 1px 3px rgba(0,0,0,.3), 
-          0 3px 5px rgba(0,0,0,.2), 
-          0 5px 10px rgba(0,0,0,.25), 
-          0 10px 10px rgba(0,0,0,.2), 
+        text-shadow:
+          0 1px 0 #ccc,
+          0 2px 0 #c9c9c9,
+          0 3px 0 #bbb,
+          0 4px 0 #b9b9b9,
+          0 5px 0 #aaa,
+          0 6px 1px rgba(0,0,0,.1),
+          0 0 5px rgba(0,0,0,.1),
+          0 1px 3px rgba(0,0,0,.3),
+          0 3px 5px rgba(0,0,0,.2),
+          0 5px 10px rgba(0,0,0,.25),
+          0 10px 10px rgba(0,0,0,.2),
           0 20px 20px rgba(0,0,0,.15),
           0 0 20px var(--gold-glow);
       }
@@ -130,9 +167,9 @@
       /* Particles */
       .particle {
         position: absolute;
-        background: radial-gradient(circle, #d4af37 0%, transparent 80%);
+        background: radial-gradient(circle, #FFCF40 0%, transparent 80%);
         border-radius: 50%;
-        opacity: 0.3;
+        opacity: 0.35;
         pointer-events: none;
       }
       /* Fog Layer */
@@ -161,13 +198,13 @@
         to { transform: translateX(100%); }
       }
       @keyframes breathing-glow {
-        0%, 100% { 
-          box-shadow: 0 0 5px rgba(212, 175, 55, 0.1);
-          background-color: rgba(212, 175, 55, 0.15);
+        0%, 100% {
+          box-shadow: 0 0 5px rgba(255, 207, 64, 0.12);
+          background-color: rgba(255, 207, 64, 0.15);
         }
-        50% { 
-          box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
-          background-color: rgba(212, 175, 55, 0.35);
+        50% {
+          box-shadow: 0 0 12px rgba(255, 207, 64, 0.35);
+          background-color: rgba(255, 207, 64, 0.35);
         }
       }
 
@@ -187,7 +224,7 @@
         0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 4px rgba(0, 242, 234, 0.2)); }
         50% { transform: translateY(-3px) scale(1.01); filter: drop-shadow(0 0 6px rgba(0, 242, 234, 0.25)); }
       }
-      
+
       .animate-float-fb { animation: float-breathing-fb 7s ease-in-out infinite; will-change: transform, filter; }
       .animate-float-ig { animation: float-breathing-ig 6.5s ease-in-out infinite; will-change: transform, filter; }
       .animate-float-tt { animation: float-breathing-tt 8s ease-in-out infinite; will-change: transform, filter; }
@@ -197,15 +234,15 @@
       .animate-slow-rotate { animation: slow-rotate 20s linear infinite; }
       .animate-shimmer { animation: shimmer 2s infinite linear; }
       .animate-breathing { animation: breathing-glow 4s ease-in-out infinite; }
-      
-      /* Static Depth Background Atmosphere */
+
+      /* Static Depth Background Atmosphere — Mahmoud Omar tones */
       .studio-atmosphere {
         position: fixed;
         inset: 0;
         z-index: -1;
         overflow: hidden;
         pointer-events: none;
-        background-color: #030303;
+        background-color: #050505;
       }
 
       .resonance-layer {
@@ -214,7 +251,7 @@
         filter: blur(160px);
       }
 
-      /* Deepest Layer - Large Dark Shapes */
+      /* Deepest Layer — Large Dark Shapes */
       .res-static-1 {
         width: 140vw;
         height: 140vw;
@@ -233,13 +270,13 @@
         opacity: 0.5;
       }
 
-      /* Mid Layer - Muted Gold Accents */
+      /* Mid Layer — Muted Yellow Accents */
       .res-static-3 {
         width: 60vw;
         height: 60vw;
         top: 10%;
         right: -5%;
-        background: radial-gradient(circle, rgba(212, 175, 55, 0.025) 0%, transparent 50%);
+        background: radial-gradient(circle, rgba(255, 207, 64, 0.035) 0%, transparent 50%);
       }
 
       .res-static-4 {
@@ -247,16 +284,16 @@
         height: 50vw;
         bottom: 5%;
         left: 5%;
-        background: radial-gradient(circle, rgba(212, 175, 55, 0.02) 0%, transparent 45%);
+        background: radial-gradient(circle, rgba(255, 207, 64, 0.03) 0%, transparent 45%);
       }
 
-      /* Subtle "Diffuser" Pattern or Grain Overlay */
+      /* Subtle grain overlay */
       .studio-atmosphere::after {
         content: '';
         position: absolute;
         inset: 0;
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        opacity: 0.015;
+        opacity: 0.02;
         mix-blend-mode: overlay;
       }
 
@@ -268,22 +305,22 @@
         border-radius: 10px;
         border: 2px solid #080808;
       }
-      ::-webkit-scrollbar-thumb:hover { background: #d4af37; }
+      ::-webkit-scrollbar-thumb:hover { background: #FFCF40; }
 
       /* AI Script Builder Visibility Fixes */
       .script-panel-textarea {
         color: #EDEDED !important;
         background-color: #1C1C1C !important;
-        caret-color: #d4af37 !important;
-        border-color: rgba(212, 175, 55, 0.2) !important;
+        caret-color: #FFCF40 !important;
+        border-color: rgba(255, 207, 64, 0.22) !important;
       }
       .script-panel-textarea::selection {
-        background-color: rgba(0, 243, 255, 0.2) !important;
-        color: #ffffff !important;
+        background-color: rgba(255, 207, 64, 0.25) !important;
+        color: #0A0A0A !important;
       }
       .script-panel-textarea::-moz-selection {
-        background-color: rgba(0, 243, 255, 0.2) !important;
-        color: #ffffff !important;
+        background-color: rgba(255, 207, 64, 0.25) !important;
+        color: #0A0A0A !important;
       }
       .script-panel-textarea:read-only {
         cursor: default;

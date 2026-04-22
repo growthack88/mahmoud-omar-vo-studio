@@ -229,13 +229,13 @@ const UnifiedAudioPlayer: React.FC<{
     try {
       const response = await fetch(url);
       const blob = await response.blob();
-      const file = new File([blob], `${title || 'savio_audio'}.wav`, { type: 'audio/wav' });
+      const file = new File([blob], `${title || 'mahmoud_omar_vo'}.wav`, { type: 'audio/wav' });
 
       if (navigator.share && navigator.canShare({ files: [file] })) {
         await navigator.share({
           files: [file],
-          title: title || 'سافيو ستوديو VO',
-          text: 'استمع إلى التعليق الصوتي المولد عبر سافيو ستوديو VO'
+          title: title || 'محمود عمر | استوديو التعليق الصوتي',
+          text: 'استمع إلى التعليق الصوتي المولد عبر استوديو محمود عمر'
         });
       } else {
         const text = encodeURIComponent(`استمع إلى التعليق الصوتي: ${window.location.href}`);
@@ -267,7 +267,7 @@ const UnifiedAudioPlayer: React.FC<{
             </button>
           )}
 
-          <button onClick={() => { if(onDownload) (onDownload as any)(); else { const a = document.createElement('a'); a.href = url; a.download = `${title || 'savio_audio'}.wav`; a.click(); } }} className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-amber-500/50 text-white/40 hover:text-amber-500 transition-all" title="تحميل الملف">
+          <button onClick={() => { if(onDownload) (onDownload as any)(); else { const a = document.createElement('a'); a.href = url; a.download = `${title || 'mahmoud_omar_vo'}.wav`; a.click(); } }} className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-amber-500/50 text-white/40 hover:text-amber-500 transition-all" title="تحميل الملف">
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
           </button>
         </div>
@@ -407,8 +407,8 @@ const CinematicIntro: React.FC<{ onComplete: () => void }> = ({ onComplete }) =>
     <div className={`fixed inset-0 z-[100] bg-[#050505] overflow-hidden flex items-center justify-center transition-opacity duration-1000 ${stage === 'fadeout' ? 'opacity-0 blur-2xl' : 'opacity-100'}`}>
       <div className="relative z-10 text-center">
         <div className={`${stage === 'titles' ? 'animate-cinematic' : 'opacity-0 transition-opacity duration-1000'}`}>
-          <h2 className="android-tech-logo text-6xl md:text-8xl">SAVIO</h2>
-          <div className="android-subtitle text-sm md:text-base">VOICE OVER</div>
+          <h2 className="android-tech-logo text-6xl md:text-8xl">MAHMOUD&nbsp;OMAR</h2>
+          <div className="android-subtitle text-sm md:text-base">VOICE&nbsp;OVER&nbsp;STUDIO</div>
         </div>
       </div>
     </div>
@@ -436,7 +436,7 @@ const ControlGroup: React.FC<{ id: string; title: string; options: { label: stri
 );
 
 const App: React.FC = () => {
-  const [showIntro, setShowIntro] = useState<boolean>(() => sessionStorage.getItem('savio_intro_played') !== 'true');
+  const [showIntro, setShowIntro] = useState<boolean>(() => sessionStorage.getItem('mo_vo_intro_played') !== 'true');
   const [appMode, setAppMode] = useState<AppMode>('home');
   const [selectedDialectId, setSelectedDialectId] = useState<string>(DIALECTS[0].id);
   const [selectedType, setSelectedType] = useState<string>(VOICE_TYPES[0]);
@@ -621,7 +621,7 @@ const App: React.FC = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `savio_transcript_${transcriptFile?.name || 'result'}.${ext}`;
+    a.download = `mahmoud_omar_vo_transcript_${transcriptFile?.name || 'result'}.${ext}`;
     a.click();
   };
 
@@ -634,7 +634,7 @@ const App: React.FC = () => {
     setActivePreviewId(profile.id);
     setError(null);
     try {
-      const previewText = PREVIEW_SCRIPTS[profile.categoryKey] || "أهلاً بك في استوديو سافيو. هذا نموذج لبصمة صوتي المميزة.";
+      const previewText = PREVIEW_SCRIPTS[profile.categoryKey] || "أهلاً بك في استوديو محمود عمر للتعليق الصوتي. هذا نموذج لبصمة صوتي المميزة.";
       const baseVoice = getBaseVoiceForType(profile.voiceType, profile.gender);
       const audioUrl = await savioService.generateVoiceOver(previewText, baseVoice, profile, voiceControls, "Identity Preview", activeProject?.dialectId || podcastDialectId);
       audio.src = audioUrl;
@@ -1827,21 +1827,21 @@ const App: React.FC = () => {
       {/* Header Utilities Cluster (Social Icons + Other Services Menu Trigger) */}
       <div className="absolute top-8 right-8 z-[100] flex flex-col items-center gap-4">
         <div className="flex items-center gap-6">
-          <NeumorphicSocialIcon 
-            platform="facebook" 
-            href="https://www.facebook.com/share/1AcufZTArY/" 
+          <NeumorphicSocialIcon
+            platform="facebook"
+            href="https://www.facebook.com/MahmoudOmarCom"
             src="https://i.ibb.co/tMQmt37y/image.png"
           />
-          
-          <NeumorphicSocialIcon 
-            platform="instagram" 
-            href="https://www.instagram.com/ahmed_samir_ai?igsh=MWNzdmR2czliNTl0Ng==" 
+
+          <NeumorphicSocialIcon
+            platform="instagram"
+            href="https://www.youtube.com/@GrowthHackAcademy?sub_confirmation=1"
             src="https://i.ibb.co/8LqyQTSR/image.png"
           />
 
-          <NeumorphicSocialIcon 
-            platform="tiktok" 
-            href="https://tiktok.com/@ahmed_savio.ai" 
+          <NeumorphicSocialIcon
+            platform="tiktok"
+            href="https://www.tiktok.com/@growthhackacademy"
             src="https://i.ibb.co/93kzPrNd/image.png"
           />
         </div>
@@ -1850,14 +1850,17 @@ const App: React.FC = () => {
 
       <header className="mb-24 text-center relative z-10 group">
         <div className="flex items-center justify-center gap-6 mb-6">
-          <div className="h-20 w-20 gold-bg rounded-[24px] flex items-center justify-center shadow-2xl rotate-3 group-hover:rotate-0 transition-transform duration-500">
-            <svg viewBox="0 0 24 24" className="h-10 w-10 text-black" fill="currentColor">
-              <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
-            </svg>
+          <div className="h-20 w-20 gold-bg rounded-[24px] flex items-center justify-center shadow-2xl rotate-3 group-hover:rotate-0 transition-transform duration-500 overflow-hidden p-[3px]">
+            <img
+              src="https://raw.githubusercontent.com/growthack88/indie-hacker-arabic/main/public/favicon.png"
+              alt="Mahmoud Omar"
+              className="mo-avatar"
+              loading="eager"
+            />
           </div>
           <div>
-            <h1 className="text-6xl font-bold gold-text tracking-tight leading-tight">سافيو ستوديو VO</h1>
-            <p className="text-white/30 text-xs uppercase tracking-[0.6em] font-medium mt-2">Professional Arabic Voice Engine</p>
+            <h1 className="text-6xl font-bold gold-text tracking-tight leading-tight">محمود عمر</h1>
+            <p className="text-white/40 text-xs uppercase tracking-[0.6em] font-medium mt-2 font-mono-mo">Mahmoud Omar Voice Over Studio</p>
           </div>
         </div>
       </header>
@@ -2299,8 +2302,8 @@ const App: React.FC = () => {
         </section>
       </div>
 
-      <footer className="mt-40 text-center relative z-10"><p className="text-xs text-white/20 uppercase tracking-[0.8em] font-light">&copy; ٢٠٢٤ سافيو ستوديو VO</p></footer>
-      {showIntro && <CinematicIntro onComplete={() => { sessionStorage.setItem('savio_intro_played', 'true'); setShowIntro(false); }} />}
+      <footer className="mt-40 text-center relative z-10"><p className="text-xs text-white/25 uppercase tracking-[0.8em] font-light font-mono-mo">&copy; ٢٠٢٦ محمود عمر · Mahmoud Omar VO Studio</p></footer>
+      {showIntro && <CinematicIntro onComplete={() => { sessionStorage.setItem('mo_vo_intro_played', 'true'); setShowIntro(false); }} />}
       {error && <div className="fixed bottom-10 left-1/2 -translate-x-1/2 px-10 py-5 bg-red-500/20 border border-red-500/30 text-red-500 rounded-3xl backdrop-blur-xl animate-in slide-in-from-bottom-5 font-bold z-[200]">{error}</div>}
     </div>
   );
