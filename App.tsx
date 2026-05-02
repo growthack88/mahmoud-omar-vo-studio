@@ -1873,7 +1873,16 @@ const App: React.FC = () => {
                 {DIALECTS.map(d => (
                   <button 
                     key={d.id} 
-                    onClick={() => setSelectedDialectId(d.id)}
+                    onClick={() => {
+                      setSelectedDialectId(d.id);
+                      // Reset previously pinned voice — it may not exist in the new dialect (and avoids name-collision bugs)
+                      setSelectedVoiceName('');
+                      setIsVoiceLocked(false);
+                      // Smooth scroll to the now-filtered voice catalogue so the user sees the result of their pick
+                      setTimeout(() => {
+                        document.getElementById('voice-catalogue-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }, 100);
+                    }}
                     className={`editorial-border p-8 text-right transition-all group ${selectedDialectId === d.id ? 'bg-[var(--mo-yellow)] block-shadow' : 'bg-white hover:border-[var(--mo-ink)]'}`}
                   >
                     <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">{d.flag}</div>
@@ -1926,16 +1935,25 @@ const App: React.FC = () => {
           </section>
 
           {/* Section: Voice Gallery */}
-          <section className="space-y-16">
+          <section id="voice-catalogue-section" className="space-y-16">
             <div className="text-right">
               <div className="section-kicker">04 // VOICE CATALOGUE</div>
               <hr className="hairline w-12 ml-auto mr-0 my-4" />
               <h3 className="section-title">معرض النخب الصوتية</h3>
-              <p className="text-[var(--mo-gray-60)] text-sm mt-2">اختر الصوت المثالي لمشروعك من بين نخبة الأصوات العربية</p>
+              <p className="text-[var(--mo-gray-60)] text-sm mt-2">
+                <span className="font-bold text-[var(--mo-ink)]">{selectedDialect.flag} {selectedDialect.title}</span>
+                <span className="mx-2">—</span>
+                اختر الصوت المثالي لمشروعك من بين <span className="font-bold text-[var(--mo-ink)]">{selectedDialect.profiles.length}</span> صوتاً متاحاً في هذه اللهجة
+              </p>
             </div>
 
+            {selectedDialect.profiles.length === 0 ? (
+              <div className="editorial-border p-16 bg-white text-center block-shadow">
+                <p className="text-[var(--mo-gray-60)] text-sm">لا توجد أصوات متاحة لهذه اللهجة حالياً. اختر لهجة أخرى من القسم الأول.</p>
+              </div>
+            ) : (
             <div className="voice-grid">
-              {allVoicesFlattened.map((profile) => {
+              {selectedDialect.profiles.map((profile) => {
                 const isPinned = selectedVoiceName === profile.name;
                 const latinName = profile.id.split('_')[1]?.toUpperCase() || profile.id.toUpperCase();
                 const dialect = DIALECTS.find(d => d.profiles.some(p => p.id === profile.id));
@@ -1997,6 +2015,7 @@ const App: React.FC = () => {
                 );
               })}
             </div>
+            )}
           </section>
 
           {/* Section 3: Control Room */}
